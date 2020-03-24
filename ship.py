@@ -2,9 +2,10 @@ import pygame
 
 class Ship():
 
-    def __init__(self, screen):
+    def __init__(self, ai_settings, screen):
         """Инициализирует корабль и задает его начальную позицию."""
         self.screen = screen
+        self.ai_settings = ai_settings
 
         # Загрузка изображения корабля и получение прямоугольника.
         self.image = pygame.image.load('Sprites/RandomShips1/alienspaceship.png')
@@ -13,6 +14,8 @@ class Ship():
         # Каждый новый корабль появляется у нижнего края экрана.
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
+        # Сохранение вещественной координаты центра корабля.
+        self.center = float(self.rect.centerx)
         # Флаги перемещения
         self.moving_right = False
         self.moving_left = False
@@ -20,10 +23,13 @@ class Ship():
     def update(self):
         """Обновляет позицию корабля с учетом флага."""
         if self.moving_right:
-            self.rect.centerx += 1
+            self.center += self.ai_settings.ship_speed_factor
 
         if self.moving_left:
-            self.rect.centerx += -1
+            self.center -= self.ai_settings.ship_speed_factor
+
+        # Обновление атрибута rect на основании self.center.
+        self.rect.centerx = self.center
 
     def blitme(self):
         """Рисует корабль в текущей позиции."""
