@@ -1,9 +1,9 @@
 import pygame
+from pygame.sprite import Group
 import sys
 from settings import Settings
 from ship import Ship
 import game_functions as gf
-from pygame.sprite import Group
 
 def run_game():
     # Инициализирует игру и создает объект экрана

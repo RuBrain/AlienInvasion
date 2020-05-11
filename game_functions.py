@@ -10,13 +10,7 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
 
     elif event.key == pygame.K_LEFT:
         ship.moving_left = True
-
-    elif event.key == pygame.K_UP:
-        ship.moving_up = True
-
-    elif event.key == pygame.K_DOWN:
-        ship.moving_down = True
-
+    
     elif event.key == pygame.K_SPACE:
         # Создание новой пули и включение ее в группу bullets.
         new_bullet = Bullet(ai_settings, screen, ship)
@@ -29,14 +23,7 @@ def check_keyup_events(event, ship):
 
     elif event.key == pygame.K_LEFT:
         ship.moving_left = False
-
-    elif event.key == pygame.K_UP:
-        ship.moving_up = False
-
-    elif event.key == pygame.K_DOWN:
-        ship.moving_down = False
-
-
+    
 def check_events(ai_settings, screen, ship, bullets):
     """Обрабатывает нажатия клавиш и события мыши."""
     for event in pygame.event.get():
@@ -56,7 +43,8 @@ def update_screen(ai_settings, screen, ship, bullets):
     # Все пули выводятся позади изображений корабля и пришельцев.
     for bullet in bullets.sprites():
         bullet.draw_bullet()
-        ship.blitme()
+
+    ship.blitme()
 
     # При каждом проходе цикла перерисовывается экран.
     screen.fill(ai_settings.bg_color)
