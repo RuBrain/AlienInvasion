@@ -40,14 +40,14 @@ def check_events(ai_settings, screen, ship, bullets):
 def update_screen(ai_settings, screen, ship, bullets):
     """Обновляет изображения на экране и отображает новый экран."""
 
+    # При каждом проходе цикла перерисовывается экран.
+    screen.fill(ai_settings.bg_color)
+    ship.blitme()
+
     # Все пули выводятся позади изображений корабля и пришельцев.
     for bullet in bullets.sprites():
         bullet.draw_bullet()
 
-    ship.blitme()
-
-    # При каждом проходе цикла перерисовывается экран.
-    screen.fill(ai_settings.bg_color)
     ship.blitme()
 
     # Отображение последнего прорисованного экрана.
