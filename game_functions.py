@@ -3,7 +3,6 @@ import pygame
 from bullet import Bullet
 from alien import Alien
 
-
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
     """Реагирует на нажатие клавиш."""
     if event.key == pygame.K_RIGHT:
@@ -35,7 +34,7 @@ def check_keyup_events(event, ship):
 def check_events(ai_settings, screen, ship, bullets):
     """Обрабатывает нажатия клавиш и события мыши."""
     for event in pygame.event.get():
-
+    
         if event.type == pygame.QUIT:
             sys.exit()
 
@@ -59,7 +58,7 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
 
     # Отображение последнего прорисованного экрана.
     pygame.display.flip()
-   
+
 def update_bullets(bullets):
     """Обновляет позиции пуль и уничтожает старые пули."""
 
@@ -71,21 +70,29 @@ def update_bullets(bullets):
         if bullet.rect.top <= 0:
             bullets.remove(bullet)
 
-def create_fleet(ai_settings, screen, aliens):
-    """Создает флот пришельцев."""
-    # Создание пришельца и вычисление количества пришельцев в ряду.
-    # Интервал между соседними пришельцами равен одной ширине пришельца.
+def get_number_aliens_x(ai_settings, alien_width):
+    """Вычисляет количество пришельцев в ряду."""
+
+    available_space_x = ai_settings.screen_width - 2 * alien_width
+    number_aliens_x = int(available_space_x / (2 * alien_width))
+    return number_aliens_x
+
+def create_alien(ai_settings, screen, aliens, alien_number):
+    """Создает пришельца и размещает его в ряду."""
 
     alien = Alien(ai_settings, screen)
     alien_width = alien.rect.width
-    available_space_x = ai_settings.screen_width - 2 * alien_width
-    number_aliens_x = int(available_space_x / (2 * alien_width))
+    alien.x = alien_width + 2 * alien_width * alien_number
+    alien.rect.x = alien.x
+    aliens.add(alien)
+
+def create_fleet(ai_settings, screen, aliens):
+    """Создает флот пришельцев."""
+
+    # Создание пришельца и вычисление количества пришельцев в ряду.
+    alien = Alien(ai_settings, screen)
+    number_aliens_x = get_number_aliens_x(ai_settings, alien.rect.width)
 
     # Создание первого ряда пришельцев.
     for alien_number in range(number_aliens_x):
-        # Создание пришельца и размещение его в ряду.
-        alien = Alien(ai_settings, screen)
-        alien.x = alien_width + 2 * alien_width * alien_number
-        alien.rect.x = alien.x
-        aliens.add(alien)
-                   
+        create_alien(ai_settings, screen, aliens, alien_number)
