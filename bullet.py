@@ -1,6 +1,5 @@
 import pygame
 from pygame.sprite import Sprite
-
 class Bullet(Sprite):
     """Класс для управления пулями, выпущенными кораблем. """
     
@@ -33,3 +32,4 @@ class Bullet(Sprite):
     def draw_bullet(self):
         """Вывод пули на экран."""
         pygame.draw.rect(self.screen, self.color, self.rect)
+        

@@ -2,6 +2,10 @@ import sys
 import pygame
 from bullet import Bullet
 from alien import Alien
+from pygame import mixer
+
+pygame.init()
+
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
     """Реагирует на нажатие клавиш."""
@@ -19,7 +23,10 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
 
 def fire_bullet(ai_settings, screen, ship, bullets):
     # Создание новой пули и включение ее в группу bullets.
+    
     if len(bullets) < ai_settings.bullets_allowed:
+        pygame.mixer.music.load('shoot.mp3')
+        pygame.mixer.music.play()
         new_bullet = Bullet(ai_settings, screen, ship)
         bullets.add(new_bullet) 
 
