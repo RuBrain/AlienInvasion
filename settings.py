@@ -5,8 +5,8 @@ class Settings():
         """Инициализирует настройки игры."""
         
         # параметры экрана:
-        self.screen_width = 1700
-        self.screen_height = 1000
+        self.screen_width = 1920
+        self.screen_height = 1080
         self.bg_color = 66, 33, 66
         self.ship_speed_factor = 8
         
@@ -16,3 +16,9 @@ class Settings():
         self.bullet_height = 15
         self.bullet_color = 0, 255, 255
         self.bullets_allowed = 4
+
+        # настройка пришельцев
+        self.alien_speed_factor = 2
+        self.fleet_drop_speed = 10
+        # fleet_direction = 1 обозначает движение вправо; а -1 - влево.
+        self.fleet_direction = 1
