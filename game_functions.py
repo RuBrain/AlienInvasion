@@ -68,7 +68,7 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
     # Отображение последнего прорисованного экрана.
     pygame.display.flip()
 
-def update_bullets(bullets):
+def update_bullets(ai_settings, screen, ship, aliens, bullets):
     """Обновляет позиции пуль и уничтожает старые пули."""
 
     # Обновление позиций пуль.
@@ -78,6 +78,22 @@ def update_bullets(bullets):
     for bullet in bullets.copy():
         if bullet.rect.top <= 0:
             bullets.remove(bullet)
+
+    # Проверка попаданий в пришельцев.
+    # При обнаружении попадания удалить пулю и пришельца.
+    collisions = pygame.sprite.groupcollide(bullets, aliens, False, True)
+
+    if collisions:
+        pygame.mixer.music.load('crash.mp3')
+        pygame.mixer.music.play()
+
+    if len(aliens) == 0:
+        # Уничтожение существующих пуль и создание нового флота.
+         ai_settings.alien_speed_factor += 2
+         ai_settings.fleet_drop_speed += 3
+         bullets.empty()
+         create_fleet(ai_settings, screen, ship, aliens)
+        
 
 def get_number_aliens_x(ai_settings, alien_width):
     """Вычисляет количество пришельцев в ряду."""
