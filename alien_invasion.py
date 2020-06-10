@@ -25,7 +25,7 @@ def run_game():
     # Создание флота пришельцев.
     gf.create_fleet(ai_settings, screen, ship, aliens)
 
-    pygame.mixer.music.load('mucik.mp3')
+    pygame.mixer.music.load('music.mp3')
     pygame.mixer.music.play()
 
     # Запуск основного цикла игры
