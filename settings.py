@@ -8,7 +8,10 @@ class Settings():
         self.screen_width = 1920
         self.screen_height = 1080
         self.bg_color = 66, 33, 66
+
+        # настройка корабля
         self.ship_speed_factor = 8
+        self.ship_limit = 3
         
         # параметры пули
         self.bullet_speed_factor = 8
@@ -20,5 +23,6 @@ class Settings():
         # настройка пришельцев
         self.alien_speed_factor = 2
         self.fleet_drop_speed = 15
+        
         # fleet_direction = 1 обозначает движение вправо; а -1 - влево.
         self.fleet_direction = 1
