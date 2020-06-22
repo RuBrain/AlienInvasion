@@ -62,18 +62,21 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
     """Запускает новую игру при нажатии кнопки Play."""
     if play_button.rect.collidepoint(mouse_x, mouse_y):
 
-        # Сброс игровой статистики.
-        stats.reset_stats()
+        button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
+        if button_clicked and not stats.game_active:
 
-        stats.game_active = True
+            # Сброс игровой статистики.
+            stats.reset_stats()
 
-        # Очистка списков пришельцев и пуль.
-        aliens.empty()
-        bullets.empty()
+            stats.game_active = True
 
-        # Создание нового флота и размещение корабля в центре.
-        create_fleet(ai_settings, screen, ship, aliens)
-        ship.center_ship()
+            # Очистка списков пришельцев и пуль.
+            aliens.empty()
+            bullets.empty()
+
+            # Создание нового флота и размещение корабля в центре.
+            create_fleet(ai_settings, screen, ship, aliens)
+            ship.center_ship()
 
 def update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button):
     """Обновляет изображения на экране и отображает новый экран."""
