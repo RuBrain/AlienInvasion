@@ -10,7 +10,7 @@ pygame.mixer.init()
 pygame.init()
 
 
-def check_keydown_events(event, ai_settings, screen, ship, bullets):
+def check_keydown_events(event, ai_settings, screen, ship, bullets, stats, aliens):
     """Реагирует на нажатие клавиш."""
     if event.key == pygame.K_RIGHT:
         ship.moving_right = True
@@ -23,6 +23,23 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
 
     elif event.key == pygame.K_q:
         sys.exit()
+
+    elif event.key == pygame.K_p:
+        # Указатель мыши скрывается.
+        pygame.mouse.set_visible(False)
+        # Сброс игровой статистики.
+        stats.reset_stats()
+
+        stats.game_active = True
+
+        # Очистка списков пришельцев и пуль.
+        aliens.empty()
+        bullets.empty()
+
+        # Создание нового флота и размещение корабля в центре.
+        create_fleet(ai_settings, screen, ship, aliens)
+        ship.center_ship()
+
 
 def fire_bullet(ai_settings, screen, ship, bullets):
     # Создание новой пули и включение ее в группу bullets.
@@ -49,7 +66,7 @@ def check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets)
             sys.exit()
 
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, screen, ship, bullets)
+            check_keydown_events(event, ai_settings, screen, ship, bullets, stats, aliens)
 
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
