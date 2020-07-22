@@ -27,19 +27,17 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets, stats, alien
     elif event.key == pygame.K_p:
         # Указатель мыши скрывается.
         pygame.mouse.set_visible(False)
+        # Сброс игровых настроек.
+        ai_settings.initialize_dynamic_settings()
         # Сброс игровой статистики.
         stats.reset_stats()
-
         stats.game_active = True
-
         # Очистка списков пришельцев и пуль.
         aliens.empty()
         bullets.empty()
-
         # Создание нового флота и размещение корабля в центре.
         create_fleet(ai_settings, screen, ship, aliens)
         ship.center_ship()
-
 
 def fire_bullet(ai_settings, screen, ship, bullets):
     # Создание новой пули и включение ее в группу bullets.
@@ -84,6 +82,9 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
 
         button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
         if button_clicked and not stats.game_active:
+
+            # Сброс игровых настроек.
+            ai_settings.initialize_dynamic_settings()
 
             # Сброс игровой статистики.
             stats.reset_stats()
@@ -141,13 +142,11 @@ def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
         pygame.mixer.music.play()
 
     if len(aliens) == 0:
-        # Уничтожение существующих пуль и создание нового флота.
-         ai_settings.alien_speed_factor += 2
-         ai_settings.fleet_drop_speed += 3
-         bullets.empty()
-         create_fleet(ai_settings, screen, ship, aliens)
+        # Уничтожение пуль, повышение скорости и создание нового флота.
+        bullets.empty()
+        ai_settings.increase_speed()
+        create_fleet(ai_settings, screen, ship, aliens)
         
-
 def get_number_aliens_x(ai_settings, alien_width):
     """Вычисляет количество пришельцев в ряду."""
 
