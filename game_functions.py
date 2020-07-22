@@ -54,8 +54,6 @@ def check_play_button(ai_settings, screen, play_button, ship, bullets, rectangle
         button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
         if button_clicked and not ai_settings.game_active:
 
-           
-
             ai_settings.game_active = True
 
             # Очистка списка пуль.
@@ -101,6 +99,7 @@ def update_bullets(ai_settings, bullets):
         ai_settings.game_active = False
         pygame.mouse.set_visible(True)
         ai_settings.permissible_shots += 3
+        ai_settings.reset_speed()
 
 def check_fleet_edges(ai_settings, rectangle):
     """Реагирует на достижение прямоугольником края экрана."""
@@ -121,6 +120,10 @@ def update_rect(ai_settings, screen, ship, bullets, rectangle):
     # Проверка коллизий "прямоугольник-пуля".
     if pygame.sprite.spritecollideany(rectangle, bullets):
         bullets.empty()
+        
+        # добавляет скорость
+        ai_settings.raising_complexity()
+
         change_fleet_direction(ai_settings, rectangle)
   
             
