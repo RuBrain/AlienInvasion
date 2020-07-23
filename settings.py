@@ -5,8 +5,8 @@ class Settings():
         """Инициализирует статические настройки игры."""
 
         # Настройки экрана
-        self.screen_width = 1200
-        self.screen_height = 800
+        self.screen_width = 1920
+        self.screen_height = 1080
         self.bg_color = (66, 33, 66)
 
         # Настройки корабля
@@ -22,7 +22,7 @@ class Settings():
         self.fleet_drop_speed = 15
 
         # Темп ускорения игры
-        self.speedup_scale = 1.1
+        self.speedup_scale = 1.4
         
         self.initialize_dynamic_settings()
 

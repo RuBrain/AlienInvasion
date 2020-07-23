@@ -99,7 +99,7 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
             create_fleet(ai_settings, screen, ship, aliens)
             ship.center_ship()
 
-def update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button):
+def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button):
     """Обновляет изображения на экране и отображает новый экран."""
 
     # При каждом проходе цикла перерисовывается экран.
@@ -110,6 +110,9 @@ def update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button
     # Все пули выводятся позади изображений корабля и пришельцев.
     for bullet in bullets.sprites():
         bullet.draw_bullet()
+
+    # Вывод счета.
+    sb.show_score()
 
     # Кнопка Play отображается в том случае, если игра неактивна.
     if not stats.game_active:
