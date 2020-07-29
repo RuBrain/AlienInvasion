@@ -160,10 +160,12 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, 
         pygame.mixer.music.load('sounds/crash.mp3')
         pygame.mixer.music.play()
 
+    start_new_level(ai_settings, screen, stats, sb, ship, aliens, bullets)
+
+def start_new_level(ai_settings, screen, stats, sb, ship, aliens, bullets):
     if len(aliens) == 0:
         # Уничтожение пуль, повышение скорости и создание нового флота.
         # Если весь флот уничтожен, начинается следующий уровень.
-        bullets.empty()
         bullets.empty()
         ai_settings.increase_speed()
         # Увеличение уровня.
