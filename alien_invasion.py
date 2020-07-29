@@ -38,6 +38,11 @@ def run_game():
     pygame.mixer.music.load('sounds/music.mp3')
     pygame.mixer.music.play(-1)
 
+    # Загрузка рекорда
+    with open('high_score.txt') as file_object:
+        contents = int(file_object.read())
+        stats.high_score = contents
+
     # Запуск основного цикла игры
     while True:
         gf.check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets)

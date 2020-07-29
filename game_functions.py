@@ -22,6 +22,9 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets, stats, alien
         fire_bullet(ai_settings, screen, ship, bullets)
 
     elif event.key == pygame.K_q:
+        with open('high_score.txt', 'w') as file_object:
+            file_object.write(str(stats.high_score))
+                              
         sys.exit()
 
     elif event.key == pygame.K_p:
@@ -61,6 +64,9 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
     for event in pygame.event.get():
     
         if event.type == pygame.QUIT:
+            with open('high_score.txt', 'w') as file_object:
+                file_object.write(str(stats.high_score))
+
             sys.exit()
 
         elif event.type == pygame.KEYDOWN:
